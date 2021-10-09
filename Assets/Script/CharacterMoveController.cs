@@ -5,25 +5,35 @@ using UnityEngine;
 public class CharacterMoveController : MonoBehaviour
 {
     [Header("Movement")]
-    public float moveAccel;
-    
+    public float xForce;
+    public float yForce;
 
     private Rigidbody2D rig;
-    private Vector2 velocity;
 
     private void Start()
     {
         rig = GetComponent<Rigidbody2D>();
 
-        velocity = new Vector2(moveAccel,0);
-        
+        PushBall();
+
     }
 
-    private void FixedUpdate()
-    {
-        
 
-        rig.MovePosition(rig.position + velocity * Time.fixedDeltaTime);
-        
+    void PushBall()
+    {
+        float randomDirection = Random.Range(0, 2);
+
+        if (randomDirection < 1.0f)
+        {
+            rig.AddForce(new Vector2(xForce, yForce));
+        }
+        else
+        {
+            
+            rig.AddForce(new Vector2(-xForce, yForce));
+        }
     }
 }
+
+
+
