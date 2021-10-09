@@ -302,7 +302,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4d171c317de818468489752739fe7a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveAccel: 2
+  moveAccel: 3
   maxSpeed: 10
 --- !u!50 &2075913385
 Rigidbody2D:

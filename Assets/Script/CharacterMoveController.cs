@@ -6,21 +6,24 @@ public class CharacterMoveController : MonoBehaviour
 {
     [Header("Movement")]
     public float moveAccel;
-    public float maxSpeed;
+    
 
     private Rigidbody2D rig;
+    private Vector2 velocity;
 
     private void Start()
     {
         rig = GetComponent<Rigidbody2D>();
+
+        velocity = new Vector2(moveAccel,0);
+        
     }
 
     private void FixedUpdate()
     {
-        Vector2 velocityVector = rig.velocity;
+        
 
-        velocityVector.x = Mathf.Clamp(velocityVector.x + moveAccel * Time.deltaTime, 0.0f, maxSpeed);
-
-        rig.velocity = velocityVector;
+        rig.MovePosition(rig.position + velocity * Time.fixedDeltaTime);
+        
     }
 }
