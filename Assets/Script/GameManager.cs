@@ -26,6 +26,8 @@ public class GameManager : MonoBehaviour
     {
         _totalScore += value;
         ScoreNumber.text = $"{_totalScore.ToString("0")}";
+
+        AchievementController.Instance.UnlockAchievement(AchievementType.ScoreAchievement, _totalScore);
     }
 
 

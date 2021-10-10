@@ -12,11 +12,17 @@ public class BoxSpawner : MonoBehaviour
     public GameManager gameManager;
     public float spawnTime = 3.0f;
 
+    //public float spawnRefresher = 10.0f;
 
 
     private void Start()
     {
         StartSpawnBox();
+    }
+
+    private void Update()
+    {
+        
     }
 
     //problem6-----------------------
@@ -54,7 +60,7 @@ public class BoxSpawner : MonoBehaviour
         Vector3 BoxPosition = new Vector3(Random.Range(-4f, 4f), Random.Range(-3.5f, 3.5f), 0);
         int randomBox = Random.Range(0, 6);
 
-        if((BoxPosition - transform.position).magnitude > 3)
+        if((BoxPosition - transform.position).magnitude > 1)
         {
             Instantiate(boxPrefabs[randomBox], BoxPosition , Quaternion.identity);
         }
@@ -75,6 +81,6 @@ public class BoxSpawner : MonoBehaviour
         AddScore();
 
         Invoke("SpawnBox", spawnTime);//Problem8
-        
+       
     }
 }
