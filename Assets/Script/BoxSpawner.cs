@@ -10,18 +10,20 @@ public class BoxSpawner : MonoBehaviour
     public double gainScore;
 
     public GameManager gameManager;
+    public float spawnTime = 3.0f;
 
 
 
     private void Start()
     {
-        SpawnBox();
+        StartSpawnBox();
     }
 
-    private void SpawnBox()
+    //problem6-----------------------
+    private void StartSpawnBox()
     {
         bool isBoxSpawned = false;
-        int totalBox = Random.Range(0,5);
+        int totalBox = Random.Range(0, 5);
 
         while (!isBoxSpawned)
         {
@@ -33,27 +35,46 @@ public class BoxSpawner : MonoBehaviour
             }
             else
             {
-                for (int i = 1; totalBox < boxPrefabs.Length ;totalBox+=i)
+                for (int i = 1; totalBox < boxPrefabs.Length; totalBox += i)
                 {
                     Vector3 _boxPosition = new Vector3(Random.Range(-3.5f, 3.5f), Random.Range(-3.0f, 3.0f), 0);
                     box[totalBox] = Instantiate(boxPrefabs[totalBox], _boxPosition, Quaternion.identity) as GameObject;
-                    
+
                 }
                 isBoxSpawned = true;
             }
         }
     }
+    //problem6-----------------------
 
+
+    //problem8---------------------------------------------------------
+    void SpawnBox()
+    {
+        Vector3 BoxPosition = new Vector3(Random.Range(-4f, 4f), Random.Range(-3.5f, 3.5f), 0);
+        int randomBox = Random.Range(0, 6);
+
+        if((BoxPosition - transform.position).magnitude > 3)
+        {
+            Instantiate(boxPrefabs[randomBox], BoxPosition , Quaternion.identity);
+        }
+    }
+    //problem8---------------------------------------------------------
+
+    //Problem7----------------------------------------
     public void AddScore()
     {
         double value = 0;
         value += gainScore;
         gameManager.ScoreIncrement(value);
     }
+    //Problem7----------------------------------------
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Destroy(collision.gameObject);
+        Destroy(collision.gameObject);//Problem7----------------------------------------
         AddScore();
+
+        Invoke("SpawnBox", spawnTime);//Problem8
         
     }
 }
