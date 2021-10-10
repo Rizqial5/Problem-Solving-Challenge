@@ -5,6 +5,10 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
+    [SerializeField] public int sceneProblem;
+
+
+
     private static GameManager _instance = null;
     public static GameManager Instance
     {
@@ -26,8 +30,12 @@ public class GameManager : MonoBehaviour
     {
         _totalScore += value;
         ScoreNumber.text = $"{_totalScore.ToString("0")}";
+        
+        if (sceneProblem == 9)
+        {
+            AchievementController.Instance.UnlockAchievement(AchievementType.ScoreAchievement, _totalScore);
+        }
 
-        AchievementController.Instance.UnlockAchievement(AchievementType.ScoreAchievement, _totalScore);
     }
 
 

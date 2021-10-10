@@ -14,7 +14,7 @@ public class BoxSpawner : MonoBehaviour
 
     //public float spawnRefresher = 10.0f;
 
-
+    [SerializeField] public int sceneProblem;
     private void Start()
     {
         StartSpawnBox();
@@ -79,8 +79,11 @@ public class BoxSpawner : MonoBehaviour
     {
         Destroy(collision.gameObject);//Problem7----------------------------------------
         AddScore();
-
-        Invoke("SpawnBox", spawnTime);//Problem8
+        if (sceneProblem == 8)
+        {
+            Invoke("SpawnBox", spawnTime);//Problem8
+        }
+        
        
     }
 }
